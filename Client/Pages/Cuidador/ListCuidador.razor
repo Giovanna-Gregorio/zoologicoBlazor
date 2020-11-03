@@ -1,0 +1,52 @@
+@page  "/cuidador/list"
+@using System.Net.Http
+@inject HttpClient Http
+@inject NavigationManager NavigationManager
+
+<h3>Cuidadores</h3>
+
+<div class="card-body">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Nome</th>
+                <th scope="col">Idade</th>
+                <th scope="col">Função</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in cuidadorList)
+            {
+            <tr>
+                <td>@item.Nome</td>
+                <td>@item.Idade</td>
+                <td>@item.Funcao</td>
+                <td>
+                    <a href="/cuidador/EditCuidador/@item.Id.ToString()"><button class="btn btn-success">Editar</button></a>
+                    <button class="btn btn-danger" @onclick="@(() => DeleteCuidador(item.Id))">Deletar</button>
+                </td>
+            </tr>
+            }   
+        </tbody>
+    </table>
+</div>
+
+@code {
+
+    private List<Cuidador> cuidadorList = new List<Cuidador>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        var cuidadores = await Http.GetFromJsonAsync<List<Cuidador>>("/Cuidador/List");
+        foreach (var item in cuidadores)
+        {
+            cuidadorList.Add(item);
+        }
+    }
+
+    private async Task DeleteCuidador(int itemId)
+    {
+        await Http.DeleteAsync("/Cuidador/Delete/"+itemId);
+        NavigationManager.NavigateTo("cuidador/list", true);
+    }
+}

@@ -1,0 +1,73 @@
+@page "/animal/EditAnimal/{item}"
+@using System.Net.Http
+@inject HttpClient Http
+@inject NavigationManager NavigationManager
+
+<div class="card m-3">
+    <h4 class="card-header">Atualizar Animal</h4>
+    <div class="card-body">
+        <EditForm Model="@animal" OnValidSubmit="HandleValidSubmit" @onreset="HandleReset">
+            <DataAnnotationsValidator />
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label>Nome</label>
+                    <div>
+                        <InputText class="form-control" @bind-Value="@animal.Nome" />
+                        <ValidationMessage For="@( () => animal.Nome )" />
+                    </div>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label>Idade</label>
+                    <div>
+                        <InputNumber class="form-control" @bind-Value="@animal.Idade" />
+                        <ValidationMessage For="@( () => animal.Idade )" />
+                    </div>
+                </div>
+
+                @* <div class="form-group col-md-6">
+                    <label>Especie</label>
+                    <div>
+                        <InputText class="form-control" @bind-Value="@animal.Especie" />
+                        <ValidationMessage For="@( () => animal.Especie )" />
+                    </div>
+                </div> *@
+
+                <div class="form-group col-md-6">
+                    <label>Peso</label>
+                    <div>
+                        <InputNumber class="form-control" @bind-Value="@animal.Peso" />
+                        <ValidationMessage For="@( () => animal.Peso )" />
+                    </div>
+                </div>
+            </div>
+        </EditForm>
+    </div>
+</div>
+
+@code {
+    private Animal animal = new Animal();
+    private EditContext editContext { get; set; }
+
+    [Parameter]
+    public string Item { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        var itemId = Item;
+        animal = await Http.GetFromJsonAsync<Animal>($"/Animal/GetById?id={itemId}");
+        editContext = new EditContext(animal);
+    }
+
+    private async Task HandleValidSubmit()
+    {
+        await Http.PutAsJsonAsync("/Animal/Update", animal);
+        NavigationManager.NavigateTo("animal/list");
+    }
+
+    private void HandleReset()
+    {
+        animal = new Animal();
+        editContext = new EditContext(animal);
+    }
+}
