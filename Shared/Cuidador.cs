@@ -16,6 +16,7 @@ namespace zoologicoBlazor.Shared
         [Required(ErrorMessage = "Função é obrigatório")] 
         public string Funcao { get; set; }
 
+        public CuidadorDetails CuidadorDetails { get; set; }
         public List<CuidadorAnimal> CuidadorAnimais { get; set; }
     }
 }

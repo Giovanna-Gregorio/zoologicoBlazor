@@ -21,14 +21,14 @@ namespace zoologicoBlazor.Server
                 .HasKey(c => new {c.IdCuidador, c.IdAnimal}); //chave composta
 
             modelBuilder.Entity<CuidadorAnimal>()
-                .HasOne(c => c.Cuidador)
-                .WithMany(ca => ca.CuidadorAnimais)
-                .HasForeignKey(c => c.IdCuidador);
+                .HasOne(ca => ca.Cuidador)
+                .WithMany(c => c.CuidadorAnimais)
+                .HasForeignKey(ca => ca.IdCuidador);
             
             modelBuilder.Entity<CuidadorAnimal>()
-                .HasOne(a => a.Animal)
-                .WithMany(ca => ca.CuidadorAnimais)
-                .HasForeignKey(a => a.IdAnimal);                
+                .HasOne(ca => ca.Animal)
+                .WithMany(a => a.CuidadorAnimais)
+                .HasForeignKey(ca => ca.IdAnimal);                
         }
         
     }
