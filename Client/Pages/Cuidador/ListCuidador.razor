@@ -22,8 +22,8 @@
                 <td>@item.Idade</td>
                 <td>@item.Funcao</td>
                 <td>
-                    <a href="/cuidador/EditCuidador/@item.Id.ToString()"><button class="btn btn-success">Editar</button></a>
-                    <button class="btn btn-danger" @onclick="@(() => DeleteCuidador(item.Id))">Deletar</button>
+                    <a href="/cuidador/EditCuidador/@item.IdCuidador.ToString()"><button class="btn btn-success">Editar</button></a>
+                    <button class="btn btn-danger" @onclick="@(() => DeleteCuidador(item.IdCuidador))">Deletar</button>
                 </td>
             </tr>
             }   

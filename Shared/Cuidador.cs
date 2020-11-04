@@ -4,7 +4,7 @@ namespace zoologicoBlazor.Shared
 {
     public class Cuidador
     {
-        public int Id { get; set; }
+        public int IdCuidador { get; set; }
     
         [Required(ErrorMessage = "Nome é obrigatório")] 
         public string Nome { get; set; }
@@ -12,7 +12,7 @@ namespace zoologicoBlazor.Shared
         [Required(ErrorMessage = "Idade é obrigatório")] 
         public int Idade  { get; set; }
 
-        [Required(ErrorMessage = "Especie é obrigatório")] 
+        [Required(ErrorMessage = "Função é obrigatório")] 
         public string Funcao { get; set; }
     }
 }
