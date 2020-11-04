@@ -49,6 +49,6 @@
     private async Task DeleteAnimal(int itemId)
     {
         await Http.DeleteAsync("/Animal/Delete/"+itemId);
-        NavigationManager.NavigateTo("animal/list", true);
+        NavigationManager.NavigateTo("animal/list"); //true
     }
 }

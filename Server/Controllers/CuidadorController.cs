@@ -26,6 +26,14 @@ namespace zoologicoBlazor.Server.Controllers
         }
 
         [HttpGet]
+        [Route("Max")]
+        public async Task<IActionResult> MaxId()
+        {
+            var cuidador = await db.Cuidadores.LastAsync();
+            return Ok(cuidador);
+        }
+
+        [HttpGet]
         [Route("GetById")]
         public async Task<IActionResult> Get([FromQuery] string id)
         {
@@ -43,8 +51,7 @@ namespace zoologicoBlazor.Server.Controllers
                 {
                     Nome = cuidador.Nome,
                     Idade = cuidador.Idade,
-                    Funcao = cuidador.Funcao,
-                
+                    Funcao = cuidador.Funcao
                 };
 
                 db.Add(newCuidador);

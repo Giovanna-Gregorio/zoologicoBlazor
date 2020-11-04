@@ -28,7 +28,13 @@ namespace zoologicoBlazor.Server
             modelBuilder.Entity<CuidadorAnimal>()
                 .HasOne(ca => ca.Animal)
                 .WithMany(a => a.CuidadorAnimais)
-                .HasForeignKey(ca => ca.IdAnimal);                
+                .HasForeignKey(ca => ca.IdAnimal);  
+
+            //adicionar chave estrangeira no cuidadorDetails
+            modelBuilder.Entity<Cuidador>()
+                .HasOne(cd => cd.CuidadorDetails)
+                .WithOne(c => c.Cuidador)
+                .HasForeignKey<CuidadorDetails>(cd => cd.IdCuidador).IsRequired();              
         }
         
     }

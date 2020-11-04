@@ -50,7 +50,8 @@
     {
         //Enviar dados para o controller no backend
         await Http.PostAsJsonAsync("/Cuidador/Create", cuidador);
-        NavigationManager.NavigateTo("cuidador/list");
+        NavigationManager.NavigateTo("cuidadorDetails/cadastro");
+        //("cuidador/list");
     }
 
     private void HandleReset()

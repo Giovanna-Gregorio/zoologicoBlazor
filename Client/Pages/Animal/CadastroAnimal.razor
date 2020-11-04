@@ -23,7 +23,7 @@
                         <ValidationMessage For="@( () => animal.Idade )" />
                     </div>
                 </div>
-                <div class="form-group col-md-12">
+                <div class="form-group col-md-6">
                     <label>Especie</label>
                     <div>
                         @* <InputText class="form-control" @bind-Value="@animal.Especie" @bind-Value:format="F2" />
@@ -35,6 +35,13 @@
                                 <option value="@especie.IdEspecie">@especie.Descricao</option>
                             }
                         </InputSelect>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label></label>
+                    <div>
+                        <a href="../especie/cadastro"><button class="btn btn-primary">Adicionar espécie</button></a>
                     </div>
                 </div>
 
@@ -74,7 +81,7 @@
     {
         //Enviar dados para o controller no backend
         await Http.PostAsJsonAsync("/Animal/Create", animal);
-        NavigationManager.NavigateTo("Animal/list");
+        NavigationManager.NavigateTo("animal/list");
     }
 
     private void HandleReset()

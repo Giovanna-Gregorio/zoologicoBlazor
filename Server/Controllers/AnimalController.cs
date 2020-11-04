@@ -44,7 +44,8 @@ namespace zoologicoBlazor.Server.Controllers
                     Nome = animal.Nome,
                     Idade = animal.Idade,
                     Peso = animal.Peso,
-                    IdEspecie = Convert.ToInt32(animal.IdEspecie)
+                    IdEspecie = animal.IdEspecie
+                    //Convert.ToInt32(animal.IdEspecie)
                 };
 
                 db.Add(newAnimal);
