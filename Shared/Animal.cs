@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace zoologicoBlazor.Shared
@@ -18,5 +19,6 @@ namespace zoologicoBlazor.Shared
 
         [Required(ErrorMessage = "Peso é obrigatório")] 
         public decimal Peso { get; set; }
+        public List<CuidadorAnimal> CuidadorAnimais { get; set; }
     }
 }

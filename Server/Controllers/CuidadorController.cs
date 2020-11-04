@@ -2,7 +2,6 @@ using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Server;
 using zoologicoBlazor.Shared;
 
 namespace zoologicoBlazor.Server.Controllers

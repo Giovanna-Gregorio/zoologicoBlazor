@@ -1,0 +1,70 @@
+@page "/cuidador/EditCuidador/{item}"
+@using System.Net.Http
+@inject HttpClient Http
+@inject NavigationManager NavigationManager
+
+<div class="card m-3">
+    <h4 class="card-header">Atualizar dados do Cuidador</h4>
+    <div class="card-body">
+       <EditForm Model="@cuidador" OnValidSubmit="HandleValidSubmit" @onreset="HandleReset">
+            <DataAnnotationsValidator/>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label>Nome</label>
+                    <div>
+                        <InputText class="form-control" @bind-Value="@cuidador.Nome" />
+                        <ValidationMessage For="@( () => cuidador.Nome )" />
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <label>Idade</label>
+                    <div>
+                        <InputNumber class="form-control" @bind-Value="@cuidador.Idade" />
+                        <ValidationMessage For="@( () => cuidador.Idade )" />
+                    </div>
+                </div>
+                <div class="form-group col-md-12">
+                    <label>Função</label>
+                    <div>
+                        <InputText class="form-control" @bind-Value="@cuidador.Funcao" />
+                        <ValidationMessage For="@( () => cuidador.Funcao )" />
+                    </div>
+                </div>
+                
+            </div>  
+            <div class="row justify-content-md-center">
+                <div>
+                    <button class="btn btn-success" type="submit">Atualizar</button>
+                    <button class="btn btn-secondary" type="reset">Cancelar</button>
+                </div>
+            </div>
+        </EditForm>
+    </div>
+</div>
+
+@code {
+    private Cuidador cuidador = new Cuidador();
+    private EditContext editContext { get; set; }
+
+    [Parameter]
+    public string Item { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        var itemId = Item;
+        cuidador = await Http.GetFromJsonAsync<Cuidador>($"/Cuidador/GetById?id={itemId}");
+        editContext = new EditContext(cuidador);
+    }
+
+    private async Task HandleValidSubmit()
+    {
+        await Http.PutAsJsonAsync("/Cuidador/Update", cuidador);
+        NavigationManager.NavigateTo("cuidador/list");
+    }
+
+    private void HandleReset()
+    {
+        cuidador = new Cuidador();
+        editContext = new EditContext(cuidador);
+    }
+}

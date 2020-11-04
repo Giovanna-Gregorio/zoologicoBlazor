@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace zoologicoBlazor.Shared
@@ -14,5 +15,7 @@ namespace zoologicoBlazor.Shared
 
         [Required(ErrorMessage = "Função é obrigatório")] 
         public string Funcao { get; set; }
+
+        public List<CuidadorAnimal> CuidadorAnimais { get; set; }
     }
 }
