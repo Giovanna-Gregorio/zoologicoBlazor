@@ -5,6 +5,7 @@ namespace zoologicoBlazor.Shared
 {
     public class Cuidador
     {
+        [Key]
         public int IdCuidador { get; set; }
     
         [Required(ErrorMessage = "Nome é obrigatório")] 

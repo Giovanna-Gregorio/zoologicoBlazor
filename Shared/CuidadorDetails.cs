@@ -1,7 +1,11 @@
+using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
+
 namespace zoologicoBlazor.Shared
 {
     public class CuidadorDetails
     {
+        [Key]
         public int IdCuidadorDetails { get; set; }
         public string Logradouro { get; set; }
         public int Numero { get; set; }
@@ -11,6 +15,7 @@ namespace zoologicoBlazor.Shared
         public string CEP { get; set; }
         public string Telefone { get; set; }
         public int IdCuidador { get; set; }
+        [ForeignKey("IdCuidador")]
         public Cuidador Cuidador { get; set; }
     }
 }
