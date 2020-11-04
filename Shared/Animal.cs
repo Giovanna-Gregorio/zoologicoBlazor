@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace zoologicoBlazor.Shared
 {
@@ -15,10 +16,11 @@ namespace zoologicoBlazor.Shared
         public int Idade  { get; set; }
 
         [Required(ErrorMessage = "Especie é obrigatório")] 
-        public int IdEspecie { get; set; }
+        public string IdEspecie { get; set; }
         public Especie Especie { get; set; }
 
         [Required(ErrorMessage = "Peso é obrigatório")] 
+        [Column(TypeName = "decimal(10,2)")]
         public decimal Peso { get; set; }
         public List<CuidadorAnimal> CuidadorAnimais { get; set; }
 

@@ -9,8 +9,8 @@
         <EditForm Model="especie" OnValidSubmit="HandleValidSubmit" @onreset="HandleReset">
             <DataAnnotationsValidator />
             <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label>Observações</label>
+                <div class="form-group col-md-12">
+                    <label>Descrição</label>
                     <div>
                         <InputText class="form-control" @bind-Value="@especie.Descricao" />
                         <ValidationMessage For="@( () => especie.Descricao )" />
@@ -31,22 +31,12 @@
 @code {
     private Especie especie = new Especie();
     private EditContext editContext { get; set; }
-    private List<Especie> especieList = new List<Especie>();
-
-    protected override async Task OnInitializedAsync()
-    {
-        var especie = await Http.GetFromJsonAsync<List<Especie>>("/Especie/List");
-        foreach (var item in especie)
-        {
-            especieList.Add(item);
-        }
-    }
 
     private async Task HandleValidSubmit()
     {
         //Enviar dados para o controller no backend
         await Http.PostAsJsonAsync("/Especie/Create", especie);
-        NavigationManager.NavigateTo("Especie/list");
+        NavigationManager.NavigateTo("animal/cadastro");
     }
 
     private void HandleReset()

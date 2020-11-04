@@ -1,0 +1,83 @@
+@page "/cuidadorDetails/cadastro"
+@using System.Net.Http
+@inject HttpClient Http
+@inject NavigationManager NavigationManager
+
+<div class="card m-3">
+    <h4 class="card-header">Cadastro dos Detalhes do Cuidador</h4>
+    <div class="card-body">
+       <EditForm Model="cd" OnValidSubmit="HandleValidSubmit" @onreset="HandleReset">
+            <DataAnnotationsValidator/>
+            <div class="form-row">
+                <div class="form-group col-md-9">
+                    <label>Logradouro</label>
+                    <div>
+                        <InputText class="form-control" @bind-Value="@cd.Logradouro" />
+                        <ValidationMessage For="@( () => cd.Logradouro )" />
+                    </div>
+                </div>
+                <div class="form-group col-md-3">
+                    <label>Número</label>
+                    <div>
+                        <InputNumber class="form-control" @bind-Value="@cd.Numero" />
+                        <ValidationMessage For="@( () => cd.Numero )" />
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <label>Cidade</label>
+                    <div>
+                        <InputText class="form-control" @bind-Value="@cd.Cidade" />
+                        <ValidationMessage For="@( () => cd.Cidade )" />
+                    </div>
+                </div>
+                <div class="form-group col-md-2">
+                    <label>Estado</label>
+                    <div>
+                        <InputText class="form-control" @bind-Value="@cd.Estado" />
+                        <ValidationMessage For="@( () => cd.Estado )" />
+                    </div>
+                </div>
+                <div class="form-group col-md-4">
+                    <label>CEP</label>
+                    <div>
+                        <InputText class="form-control" @bind-Value="@cd.CEP" />
+                        <ValidationMessage For="@( () => cd.CEP )" />
+                    </div>
+                </div>
+                <div class="form-group col-md-12">
+                    <label>Telefone</label>
+                    <div>
+                        <InputText class="form-control" @bind-Value="@cd.Telefone" />
+                        <ValidationMessage For="@( () => cd.Telefone )" />
+                    </div>
+                </div>
+            </div>  
+            <div class="row justify-content-md-center">
+                <div>
+                    <button class="btn btn-success" type="submit">Cadastrar</button>
+                    <button class="btn btn-secondary" type="reset">Cancelar</button>
+                </div>
+            </div>
+        </EditForm>
+    </div>
+</div>
+
+@code {
+    private CuidadorDetails cd = new CuidadorDetails();
+    private EditContext editContext { get; set; }
+
+    private async Task HandleValidSubmit()
+    {
+        //Enviar dados para o controller no backend
+        var cuidador = await Http.GetFromJsonAsync<Cuidador>("/Cuidador/Max");
+        cd.IdCuidador = Convert.ToInt32(cuidador.IdCuidador);
+        await Http.PostAsJsonAsync("/CuidadorDetails/Create", cd);
+        NavigationManager.NavigateTo("cuidador/list");
+    }
+
+    private void HandleReset()
+    {
+        cd = new CuidadorDetails();
+        editContext = new EditContext(cd);
+    }
+}

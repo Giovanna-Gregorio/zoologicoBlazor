@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using zoologicoBlazor.Server;
 
 namespace zoologicoBlazor.Server.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201104220102_inicial")]
+    partial class inicial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -26,14 +28,9 @@ namespace zoologicoBlazor.Server.Migrations
                     b.Property<int?>("EspecieIdEspecie")
                         .HasColumnType("int");
 
-<<<<<<< HEAD
-                    b.Property<int>("IdEspecie")
-                        .HasColumnType("int");
-=======
                     b.Property<string>("IdEspecie")
                         .IsRequired()
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
->>>>>>> a747dbca3a23abc2c9f85d0226815a06f4db5cc0
 
                     b.Property<int>("Idade")
                         .HasColumnType("int");
@@ -43,11 +40,7 @@ namespace zoologicoBlazor.Server.Migrations
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<decimal>("Peso")
-<<<<<<< HEAD
-                        .HasColumnType("decimal(65,30)");
-=======
                         .HasColumnType("decimal(10,2)");
->>>>>>> a747dbca3a23abc2c9f85d0226815a06f4db5cc0
 
                     b.HasKey("IdAnimal");
 
