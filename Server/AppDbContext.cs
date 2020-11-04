@@ -17,8 +17,9 @@ namespace zoologicoBlazor.Server
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            //chave composta (N - N)
             modelBuilder.Entity<CuidadorAnimal>()
-                .HasKey(c => new {c.IdCuidador, c.IdAnimal}); //chave composta
+                .HasKey(c => new {c.IdCuidador, c.IdAnimal}); 
 
             modelBuilder.Entity<CuidadorAnimal>()
                 .HasOne(ca => ca.Cuidador)
@@ -30,12 +31,11 @@ namespace zoologicoBlazor.Server
                 .WithMany(a => a.CuidadorAnimais)
                 .HasForeignKey(ca => ca.IdAnimal);  
 
-            //adicionar chave estrangeira no cuidadorDetails
+            //adicionar chave estrangeira do cuidador no cuidadorDetails
             modelBuilder.Entity<Cuidador>()
                 .HasOne(cd => cd.CuidadorDetails)
                 .WithOne(c => c.Cuidador)
-                .HasForeignKey<CuidadorDetails>(cd => cd.IdCuidador).IsRequired();              
-        }
-        
+                .HasForeignKey<CuidadorDetails>(cd => cd.IdCuidador).IsRequired();                          
+        } 
     }
 }
