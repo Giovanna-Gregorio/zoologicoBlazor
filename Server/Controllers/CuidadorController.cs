@@ -22,7 +22,7 @@ namespace zoologicoBlazor.Server.Controllers
         [Route("List")]
         public async Task<IActionResult> Get()
         {
-            var cuidador = await db.Cuidador.ToListAsync();
+            var cuidador = await db.Cuidadores.ToListAsync();
             return Ok(cuidador);
         }
 
@@ -30,7 +30,7 @@ namespace zoologicoBlazor.Server.Controllers
         [Route("GetById")]
         public async Task<IActionResult> Get([FromQuery] string id)
         {
-            var cuidador = await db.Cuidador.SingleOrDefaultAsync(x => x.IdCuidador == Convert.ToInt32(id));
+            var cuidador = await db.Cuidadores.SingleOrDefaultAsync(x => x.IdCuidador == Convert.ToInt32(id));
             return Ok(cuidador);
         }
 
@@ -87,12 +87,12 @@ namespace zoologicoBlazor.Server.Controllers
             {
                 return BadRequest(ModelState);
             }
-            var cuidador = await db.Cuidador.FindAsync(id);
+            var cuidador = await db.Cuidadores.FindAsync(id);
             if (cuidador == null)
             {
                 return NotFound();
             }
-            db.Cuidador.Remove(cuidador);
+            db.Cuidadores.Remove(cuidador);
             await db.SaveChangesAsync();
             return Ok(cuidador);
         }
