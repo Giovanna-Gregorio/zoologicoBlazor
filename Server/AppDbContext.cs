@@ -29,7 +29,6 @@ namespace zoologicoBlazor.Server
                 .HasOne(ca => ca.Animal)
                 .WithMany(a => a.CuidadorAnimais)
                 .HasForeignKey(ca => ca.IdAnimal);                
-        }
-        
+        } 
     }
 }
