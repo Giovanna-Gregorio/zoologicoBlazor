@@ -40,6 +40,8 @@ namespace zoologicoBlazor.Server.Controllers
                 {
                     //Pedido = pedido,
                     //Produto = db.Products.FirstOrDefault(c => c.ProductId == Convert.ToInt32(dp.ProdutoId)),
+                    IdAnimal = ca.IdAnimal,
+                    IdCuidador = ca.IdCuidador,
                     Observacoes = ca.Observacoes
                 };
 

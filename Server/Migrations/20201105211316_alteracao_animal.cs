@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace zoologicoBlazor.Server.Migrations
 {
-    public partial class inicial : Migration
+    public partial class alteracao_animal : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -41,13 +41,13 @@ namespace zoologicoBlazor.Server.Migrations
                 {
                     IdCuidadorDetails = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Logradouro = table.Column<string>(nullable: true),
+                    Logradouro = table.Column<string>(nullable: false),
                     Numero = table.Column<int>(nullable: false),
-                    Bairro = table.Column<string>(nullable: true),
-                    Cidade = table.Column<string>(nullable: true),
-                    Estado = table.Column<string>(nullable: true),
-                    CEP = table.Column<string>(nullable: true),
-                    Telefone = table.Column<string>(nullable: true),
+                    Bairro = table.Column<string>(nullable: false),
+                    Cidade = table.Column<string>(nullable: false),
+                    Estado = table.Column<string>(nullable: false),
+                    CEP = table.Column<string>(nullable: false),
+                    Telefone = table.Column<string>(nullable: false),
                     IdCuidador = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -69,19 +69,18 @@ namespace zoologicoBlazor.Server.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Nome = table.Column<string>(nullable: false),
                     Idade = table.Column<int>(nullable: false),
-                    IdEspecie = table.Column<string>(nullable: false),
-                    EspecieIdEspecie = table.Column<int>(nullable: true),
+                    IdEspecie = table.Column<int>(nullable: false),
                     Peso = table.Column<decimal>(type: "decimal(10,2)", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Animais", x => x.IdAnimal);
                     table.ForeignKey(
-                        name: "FK_Animais_Especies_EspecieIdEspecie",
-                        column: x => x.EspecieIdEspecie,
+                        name: "FK_Animais_Especies_IdEspecie",
+                        column: x => x.IdEspecie,
                         principalTable: "Especies",
                         principalColumn: "IdEspecie",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -110,9 +109,9 @@ namespace zoologicoBlazor.Server.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Animais_EspecieIdEspecie",
+                name: "IX_Animais_IdEspecie",
                 table: "Animais",
-                column: "EspecieIdEspecie");
+                column: "IdEspecie");
 
             migrationBuilder.CreateIndex(
                 name: "IX_CuidadorAnimais_IdAnimal",
