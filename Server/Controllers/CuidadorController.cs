@@ -26,7 +26,7 @@ namespace zoologicoBlazor.Server.Controllers
         }
 
         [HttpGet]
-        [Route("Max")]
+        [Route("Ultimo")]
         public async Task<IActionResult> MaxId()
         {
             var cuidador = await db.Cuidadores.LastAsync();
