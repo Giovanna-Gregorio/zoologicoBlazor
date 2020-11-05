@@ -17,7 +17,6 @@ namespace zoologicoBlazor.Shared
 
         [Required(ErrorMessage = "Especie é obrigatório")] 
         public int IdEspecie { get; set; }
-        [ForeignKey("IdEspecie")]
         public Especie Especie { get; set; }
 
         [Required(ErrorMessage = "Peso é obrigatório")] 

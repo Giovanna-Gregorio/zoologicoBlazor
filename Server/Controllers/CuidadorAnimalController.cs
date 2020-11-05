@@ -25,6 +25,14 @@ namespace zoologicoBlazor.Server.Controllers
             return Ok(cuidadorAnimais);
         }
 
+        [HttpGet]
+        [Route("GetById/{id}")]
+        public async Task<IActionResult> GetById([FromRoute] int id)
+        {
+            var cuidadorAnimais = await db.CuidadorAnimais.FindAsync(id);
+            return Ok(cuidadorAnimais);
+        }
+
         [HttpPost]
         [Route("Create")]
         public async Task<ActionResult> Post([FromBody] CuidadorAnimal ca)

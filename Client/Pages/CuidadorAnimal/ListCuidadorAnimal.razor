@@ -1,0 +1,59 @@
+@page  "/cuidadoranimal/list"
+@using System.Net.Http
+@inject HttpClient Http
+@inject NavigationManager NavigationManager
+
+<h3>Animais</h3>
+
+<div class="card-body">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Cuidador</th>
+                <th scope="col">Animal</th>
+                <th scope="col">Observações</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in cuidadorAnimalList)
+            {
+            <tr>
+                <td>@item.Cuidador.Nome</td>
+                <td>@item.Animal.Nome</td>
+                <td>@item.Observacoes</td>
+                <td>
+                    <a href="/animal/EditAnimal/@item.IdAnimal.ToString()"><button class="btn btn-success">Editar</button></a>
+                    <button class="btn btn-danger" @onclick="@(() => DeleteCuidadorAnimal(item.IdAnimal))">Deletar</button>
+                </td>
+            </tr>
+            }   
+        </tbody>
+    </table>
+</div>
+
+@code {
+
+    private List<CuidadorAnimal> cuidadorAnimalList = new List<CuidadorAnimal>();
+    private List<Animal> animalList = new List<Animal>();
+    private List<Cuidador> cuidadorList = new List<Cuidador>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        var ca = await Http.GetFromJsonAsync<List<CuidadorAnimal>>("/CuidadorAnimal/List");
+        foreach (var item in ca)
+        {
+            var animal = await Http.GetFromJsonAsync<Animal>($"/Animal/GetById?id={item.IdAnimal}");
+            item.Animal = animal;
+            var cuidador = await Http.GetFromJsonAsync<Cuidador>($"/Cuidador/GetById/{item.IdCuidador}");
+            item.Cuidador = cuidador;
+            cuidadorAnimalList.Add(item);
+        }
+    }
+
+    private async Task DeleteCuidadorAnimal(int itemId)
+    {
+        await Http.DeleteAsync("/Animal/Delete/"+itemId);
+        NavigationManager.NavigateTo("animal/cadastro");
+    }
+}
