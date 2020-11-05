@@ -1,7 +1,4 @@
-<<<<<<< HEAD
 using System.ComponentModel.DataAnnotations.Schema;
-=======
->>>>>>> a747dbca3a23abc2c9f85d0226815a06f4db5cc0
 using System.ComponentModel.DataAnnotations;
 
 namespace zoologicoBlazor.Shared
