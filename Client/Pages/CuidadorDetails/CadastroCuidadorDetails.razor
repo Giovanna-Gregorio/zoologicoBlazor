@@ -69,7 +69,7 @@
     private async Task HandleValidSubmit()
     {
         //Enviar dados para o controller no backend
-        var cuidador = await Http.GetFromJsonAsync<Cuidador>("/Cuidador/Max");
+        var cuidador = await Http.GetFromJsonAsync<Cuidador>("/Cuidador/Ultimo");
         cd.IdCuidador = Convert.ToInt32(cuidador.IdCuidador);
         await Http.PostAsJsonAsync("/CuidadorDetails/Create", cd);
         NavigationManager.NavigateTo("cuidador/list");

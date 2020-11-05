@@ -25,13 +25,18 @@
                     </div>
                 </div>
 
-                @* <div class="form-group col-md-6">
+                <div class="form-group col-md-6">
                     <label>Especie</label>
                     <div>
-                        <InputText class="form-control" @bind-Value="@animal.Especie" />
-                        <ValidationMessage For="@( () => animal.Especie )" />
+                        <InputSelect @bind-Value="animal.IdEspecie">
+                            <option value="">Selecione a Espécie</option>
+                            @foreach (var especie in especiesList)
+                            {
+                                <option value="@especie.IdEspecie">@especie.Descricao</option>
+                            }
+                        </InputSelect>
                     </div>
-                </div> *@
+                </div>
 
                 <div class="form-group col-md-6">
                     <label>Peso</label>
@@ -40,7 +45,6 @@
                         <ValidationMessage For="@( () => animal.Peso )" />
                     </div>
                 </div>
-                <div class="form-group col-md-6"></div>
             </div>
             <div class="row justify-content-md-center">
                 <div>
@@ -55,12 +59,19 @@
 @code {
     private Animal animal = new Animal();
     private EditContext editContext { get; set; }
+    private List<Especie> especiesList = new List<Especie>();
 
     [Parameter]
     public string Item { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
+        var especies = await Http.GetFromJsonAsync<List<Especie>>("/Especie/List");
+        foreach (var item in especies)
+        {
+            especiesList.Add(item);
+        }
+        
         var itemId = Item;
         animal = await Http.GetFromJsonAsync<Animal>($"/Animal/GetById?id={itemId}");
         editContext = new EditContext(animal);

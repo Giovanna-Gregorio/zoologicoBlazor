@@ -24,7 +24,5 @@ namespace zoologicoBlazor.Shared
         [Column(TypeName = "decimal(10,2)")]
         public decimal Peso { get; set; }
         public List<CuidadorAnimal> CuidadorAnimais { get; set; }
-
-    
     }
 }

@@ -25,6 +25,14 @@ namespace zoologicoBlazor.Server.Controllers
             return Ok(especies);
         }
 
+        [HttpGet]
+        [Route("GetById")]
+        public async Task<IActionResult> Get([FromQuery] string id)
+        {
+            var especie = await db.Especies.SingleOrDefaultAsync(x => x.IdEspecie == Convert.ToInt32(id));
+            return Ok(especie);
+        }
+
         [HttpPost]
         [Route("Create")]
         public async Task<ActionResult> Post([FromBody] Especie especie)

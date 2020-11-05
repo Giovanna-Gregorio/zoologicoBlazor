@@ -11,8 +11,9 @@
             <tr>
                 <th scope="col">Nome</th>
                 <th scope="col">Idade</th>
-                @* <th scope="col">Espécie</th> *@
+                <th scope="col">Espécie</th>
                 <th scope="col">Peso</th>
+                <th scope="col"></th>
             </tr>
         </thead>
         <tbody>
@@ -21,7 +22,7 @@
             <tr>
                 <td>@item.Nome</td>
                 <td>@item.Idade</td>
-                @* <td>@item.Especie</td> *@
+                <td>@item.Especie.Descricao</td>
                 <td>@item.Peso</td>
                 <td>
                     <a href="/animal/EditAnimal/@item.IdAnimal.ToString()"><button class="btn btn-success">Editar</button></a>
@@ -42,6 +43,7 @@
         var animais = await Http.GetFromJsonAsync<List<Animal>>("/Animal/List");
         foreach (var item in animais)
         {
+            item.Especie = await Http.GetFromJsonAsync<Especie>($"/Especie/GetById?id={item.IdEspecie}");
             animalList.Add(item);
         }
     }
@@ -49,6 +51,6 @@
     private async Task DeleteAnimal(int itemId)
     {
         await Http.DeleteAsync("/Animal/Delete/"+itemId);
-        NavigationManager.NavigateTo("animal/list"); //true
+        NavigationManager.NavigateTo("animal/cadastro");
     }
 }

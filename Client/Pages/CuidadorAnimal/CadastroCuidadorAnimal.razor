@@ -42,14 +42,14 @@
             </div>
         </div>
 
-        @code {
+@code {
     private CuidadorAnimal cuidadoranimal = new CuidadorAnimal();
     private EditContext editContext { get; set; }
     private List<Cuidador> CuidadorList = new List<Cuidador>();
     private List<Animal> AnimalList = new List<Animal>();
 
-    @* [Parameter]
-    public string Text { get; set; } *@
+    //[Parameter]
+    //public string Text { get; set; } 
 
     protected override async Task OnInitializedAsync()
     {
@@ -71,18 +71,17 @@
         }
     }
 
-
-
-    @* private async Task OnChangeCat(string value)
+    /*
+    private async Task OnChangeCat(string value)
     {
         //cuidadoranimal.IdCuidador = Convert.ToInt32(value); //Seta o valor do Cuidador no CuidadorAnimal
         
-    } *@
+    } 
+    */
 
     private async Task HandleValidSubmit()
     {
         await Http.PostAsJsonAsync("/CuidadorAnimal/Create", cuidadoranimal);
         NavigationManager.NavigateTo("animal/list");
     }
-
 }
