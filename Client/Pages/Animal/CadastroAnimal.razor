@@ -28,13 +28,13 @@
                     <div>
                         @* <InputText class="form-control" @bind-Value="@animal.Especie" @bind-Value:format="F2" />
                         <ValidationMessage For="@( () => animal.Especie )" /> *@
-                        <InputSelect @bind-Value="animal.IdEspecie">
+                        <select @bind="animal.IdEspecie">
                             <option value="">Selecione a Espécie</option>
                             @foreach (var especie in especiesList)
                             {
                                 <option value="@especie.IdEspecie">@especie.Descricao</option>
                             }
-                        </InputSelect>
+                        </select>
                     </div>
                 </div>
 

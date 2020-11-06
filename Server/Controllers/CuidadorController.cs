@@ -34,10 +34,10 @@ namespace zoologicoBlazor.Server.Controllers
         }
 
         [HttpGet]
-        [Route("GetById")]
-        public async Task<IActionResult> Get([FromQuery] string id)
+        [Route("GetById/{id}")]
+        public async Task<IActionResult> Get([FromRoute] int id)
         {
-            var cuidador = await db.Cuidadores.SingleOrDefaultAsync(x => x.IdCuidador == Convert.ToInt32(id));
+            var cuidador = await db.Cuidadores.FindAsync(id);
             return Ok(cuidador);
         }
 

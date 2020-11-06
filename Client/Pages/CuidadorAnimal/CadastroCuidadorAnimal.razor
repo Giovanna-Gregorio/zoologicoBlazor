@@ -82,6 +82,6 @@
     private async Task HandleValidSubmit()
     {
         await Http.PostAsJsonAsync("/CuidadorAnimal/Create", cuidadoranimal);
-        NavigationManager.NavigateTo("animal/list");
+        NavigationManager.NavigateTo("cuidadoranimal/list");
     }
 }

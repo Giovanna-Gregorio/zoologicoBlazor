@@ -23,7 +23,6 @@
                 <td>@item.Animal.Nome</td>
                 <td>@item.Observacoes</td>
                 <td>
-                    <a href="/animal/EditAnimal/@item.IdAnimal.ToString()"><button class="btn btn-success">Editar</button></a>
                     <button class="btn btn-danger" @onclick="@(() => DeleteCuidadorAnimal(item.IdAnimal))">Deletar</button>
                 </td>
             </tr>
@@ -53,7 +52,7 @@
 
     private async Task DeleteCuidadorAnimal(int itemId)
     {
-        await Http.DeleteAsync("/Animal/Delete/"+itemId);
+        await Http.DeleteAsync("/CuidadorAnimal/Delete/"+itemId);
         NavigationManager.NavigateTo("animal/cadastro");
     }
 }

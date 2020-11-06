@@ -62,5 +62,23 @@ namespace zoologicoBlazor.Server.Controllers
                 return View(e);
             }
         }
+
+        [HttpDelete]
+        [Route("Delete/{id}")]
+        public async Task<ActionResult<CuidadorAnimal>> Delete(int id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var ca = await db.CuidadorAnimais.FindAsync(id);
+            if (ca == null)
+            {
+                return NotFound();
+            }
+            db.CuidadorAnimais.Remove(ca);
+            await db.SaveChangesAsync();
+            return Ok(ca);
+        }
     }
 }
