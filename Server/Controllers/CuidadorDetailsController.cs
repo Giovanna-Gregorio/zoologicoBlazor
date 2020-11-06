@@ -27,6 +27,7 @@ namespace zoologicoBlazor.Server.Controllers
                 {
                     Logradouro = cd.Logradouro,
                     Numero = cd.Numero,
+                    Bairro = cd.Bairro,
                     Cidade = cd.Cidade,
                     Estado = cd.Estado,
                     CEP = cd.CEP,

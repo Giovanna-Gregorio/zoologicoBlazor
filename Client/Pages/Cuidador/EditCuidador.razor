@@ -52,7 +52,7 @@
     protected override async Task OnInitializedAsync()
     {
         var itemId = Item;
-        cuidador = await Http.GetFromJsonAsync<Cuidador>($"/Cuidador/GetById?id={itemId}");
+        cuidador = await Http.GetFromJsonAsync<Cuidador>($"/Cuidador/GetById/{itemId}");
         editContext = new EditContext(cuidador);
     }
 

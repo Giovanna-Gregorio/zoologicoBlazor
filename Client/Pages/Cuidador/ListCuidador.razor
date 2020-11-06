@@ -47,6 +47,6 @@
     private async Task DeleteCuidador(int itemId)
     {
         await Http.DeleteAsync("/Cuidador/Delete/"+itemId);
-        NavigationManager.NavigateTo("cuidador/list"); //true
+        NavigationManager.NavigateTo("cuidador/cadastro"); //true
     }
 }

@@ -10,25 +10,30 @@
             <DataAnnotationsValidator />
 
             <div class="form-row">
-                <label>Cuidador</label>
-                <select @bind="cuidadoranimal.IdCuidador"> 
-                    <option value="">Selecione o Cuidador</option>
-                    @foreach (var cuidador in CuidadorList)
-                            {
-                                <option value="@cuidador.IdCuidador">@cuidador.Nome</option>
-                            }
-                </select>
+                <div class="form-group col-md-6">
+                    <label>Cuidador</label>
+                    <select class="form-control" @bind="cuidadoranimal.IdCuidador"> 
+                        <option value="">Selecione o Cuidador</option>
+                        @foreach (var cuidador in CuidadorList)
+                        {
+                            <option value="@cuidador.IdCuidador">@cuidador.Nome</option>
+                        }
+                    </select>
+                </div>
+                        
+                <div class="form-group col-md-6">
+                    <label>Animal</label>
+                    <select class="form-control" @bind="cuidadoranimal.IdAnimal">
+                        <option value="">Selecione o Animal</option>
+                        @foreach (var animal in AnimalList)
+                        {
+                            <option value="@animal.IdAnimal">@animal.Nome</option>
+                        }
+                    </select>
+                </div>
             </div>
 
             <div class="form-row">
-                        <label>Animal</label>
-                        <select @bind="cuidadoranimal.IdAnimal">
-                            <option value="">Selecione o Animal</option>
-                            @foreach (var animal in AnimalList)
-                            {
-                                <option value="@animal.IdAnimal">@animal.Nome</option>
-                            }
-                        </select>
             </div>
             <div class="form-row">
                         <label>Observação</label>

@@ -52,7 +52,7 @@
 
     private async Task DeleteCuidadorAnimal(int itemId)
     {
-        await Http.DeleteAsync("/CuidadorAnimal/Delete/"+itemId);
+        await Http.DeleteAsync($"/CuidadorAnimal/Delete/{itemId}");
         NavigationManager.NavigateTo("animal/cadastro");
     }
 }
